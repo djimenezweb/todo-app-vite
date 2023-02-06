@@ -2,14 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- PON UN FAVICON!!! -->
     <link rel="icon" type="image/svg+xml" href="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- CAMBIA EL TITLE!!! -->
-    <title>Vite Template</title>
+    <title>Todo app</title>
   </head>
   <body>
-    <img src="assets/images/anubis.jpg" width="500px" alt="anubis" />
+    <h1>TODO</h1>
+    <form id="form" action="">
+      <input id="form__input" type="text" placeholder="Create a new todo..." />
+    </form>
+    <div id="todo-list" class="todo-list"></div>
+    <div class="filters">
+      <p><span id="itemsLeft"></span>items left</p>
+      <p>All</p>
+      <p>Active</p>
+      <p>Completed</p>
+      <p id="filter__clear">Clear Completed</p>
+    </div>
     <script type="module" src="./js/index.js"></script>
   </body>
 </html>
