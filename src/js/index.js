@@ -15,18 +15,6 @@ let activeTasks = [];
 
 let completedTasks = [];
 
-/* 
-
-allTasks = [
-  {
-  checked: true,
-  id: 1234,
-  task: 'Texto'
- }
-]
-
-*/
-
 // FUNCIONES
 
 const printItemsLeft = () => {
