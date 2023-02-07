@@ -1,1 +1,20 @@
-/* ESTILOS DEL MAIN */
+@use '../mixins/responsive.scss' as *;
+
+.main {
+  padding: 0 1.5rem;
+  width: 540px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  top: 48px;
+
+  @include responsive(tablet) {
+    top: 70px;
+  }
+}
+
+.logos {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}

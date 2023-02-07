@@ -2,23 +2,43 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo app</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <h1>TODO</h1>
-    <form id="form" action="">
-      <input id="form__input" type="text" placeholder="Create a new todo..." />
-    </form>
-    <div id="todo-list" class="todo-list"></div>
-    <div class="filters">
-      <p><span id="itemsLeft"></span>items left</p>
-      <p>All</p>
-      <p>Active</p>
-      <p>Completed</p>
-      <p id="filter__clear">Clear Completed</p>
-    </div>
+    <header class="header"></header>
+
+    <main class="main">
+      <div class="logos">
+        <img class="logo" src="assets/images/logo.svg" alt="Todo" />
+        <img class="theme-icon" src="assets/images/icon-moon.svg" alt="Theme icon" />
+      </div>
+
+      <form id="form" class="form" action="">
+        <label for="form__input" class="form__label"></label>
+        <input id="form__input" class="form__input" type="text" placeholder="Create a new todo..." />
+      </form>
+
+      <section id="todo-list" class="todo-list">
+        <!--<div class="task">
+          <input class="task__input" type="checkbox" id="1675763803350" />
+          <label class="task__label" for="1675763803350">Prueba</label>
+          <img src="assets/images/icon-cross.svg" class="close-icon" />
+        </div>-->
+      </section>
+      <ul class="filters">
+        <li class="filter__item"><span id="itemsLeft"></span>items left</li>
+        <li class="filter__item">All</li>
+        <li class="filter__item">Active</li>
+        <li class="filter__item">Completed</li>
+        <li class="filter__item" id="filter__clear">Clear Completed</li>
+      </ul>
+    </main>
     <script type="module" src="./js/index.js"></script>
   </body>
 </html>

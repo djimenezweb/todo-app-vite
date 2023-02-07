@@ -23,8 +23,11 @@ const createFragment = array => {
     newImg.classList.add('close-icon');
     newInput.type = 'checkbox';
     newInput.id = item.id;
+    newInput.classList.add('task__input');
     newLabel.htmlFor = item.id;
+    newLabel.classList.add('task__label');
     newLabel.textContent = item.task;
+    newTask.classList.add('task');
     newTask.append(newInput);
     newTask.append(newLabel);
     newTask.append(newImg);

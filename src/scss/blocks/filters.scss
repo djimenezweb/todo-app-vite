@@ -1,0 +1,22 @@
+@use '../mixins/pseudo.scss' as *;
+
+.filters {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  color: var(--soft-text-color);
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.filter__item {
+  cursor: pointer;
+}
+
+.filter__item:first-child {
+  margin-right: auto;
+}
+
+.filter__item:last-child {
+  margin-left: auto;
+}
