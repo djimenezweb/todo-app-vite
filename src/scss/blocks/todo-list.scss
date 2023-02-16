@@ -1,10 +1,16 @@
 @use '../mixins/pseudo.scss' as *;
 
-.todo-list {
+.todo-list__container {
   background-color: var(--list-background);
   border-radius: 5px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
+
+//.todo-list {
+//background-color: var(--list-background);
+//border-radius: 5px;
+//box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+//}
 
 .task {
   width: 100%;
@@ -25,13 +31,34 @@
     left: 48px;
     width: 80%;
     color: var(--item);
+    line-height: 1;
+    cursor: pointer;
 
     &::before {
       @include pseudo(24px, 24px);
       border: 1px solid var(--lines);
+      background-color: var(--list-background);
       border-radius: 50%;
       left: -48px;
       top: 0;
+      z-index: 10;
+    }
+
+    &:hover::before {
+      border: none;
+      width: 20px;
+      height: 20px;
+      top: 2px;
+      left: -46px;
+    }
+
+    &:hover::after {
+      @include pseudo(24px, 24px);
+      background-image: linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+      border-radius: 50%;
+      left: -48px;
+      top: 0;
+      z-index: 1;
     }
   }
 }
@@ -45,4 +72,8 @@
 .task__input:checked + .task__label {
   color: var(--completed);
   text-decoration: line-through;
+}
+
+.close-icon {
+  cursor: pointer;
 }

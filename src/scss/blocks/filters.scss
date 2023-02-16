@@ -9,14 +9,22 @@
   gap: 18px;
 }
 
+.filter__item--left {
+  margin-right: auto;
+}
+
 .filter__item {
   cursor: pointer;
 }
 
-.filter__item:first-child {
-  margin-right: auto;
+.filter__item:hover {
+  color: var(--item);
 }
 
 .filter__item:last-child {
   margin-left: auto;
+}
+
+.filter__item--active {
+  color: var(--primary-blue);
 }

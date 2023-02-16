@@ -1,5 +1,6 @@
 import '../scss/styles.scss';
 
+const LS = localStorage;
 const formElement = document.getElementById('form');
 const formInputElement = document.getElementById('form__input');
 const todoListElement = document.getElementById('todo-list');
@@ -8,14 +9,26 @@ const filterAllElement = document.getElementById('filter__all');
 const filterActiveElement = document.getElementById('filter__active');
 const filterCompletedElement = document.getElementById('filter__completed');
 const itemsLeftElement = document.getElementById('itemsLeft');
+const toggleModeElement = document.getElementById('toggle-mode');
 
-let allTasks = [];
-
+//let allTasks = [];
+let allTasks = JSON.parse(LS.getItem('localStorage'));
 let activeTasks = [];
 
 let completedTasks = [];
 
 // FUNCIONES
+
+const activateFilter = filter => {
+  document.querySelector('.filter__item--active').classList.remove('filter__item--active');
+  filter.classList.add('filter__item--active');
+};
+
+const updateLocalStorage = () => {
+  LS.clear();
+  LS.setItem('localStorage', JSON.stringify(allTasks));
+  console.log(LS);
+};
 
 const printItemsLeft = () => {
   itemsLeftElement.textContent = allTasks.filter(item => !item.checked).length + ' ';
@@ -60,12 +73,14 @@ const createObject = task => {
   newObject.checked = false;
   allTasks.push(newObject);
   createFragment(allTasks);
+  updateLocalStorage();
 };
 
 const deleteTask = id => {
   const filteredArray = allTasks.filter(item => item.id !== id);
   allTasks = filteredArray;
   createFragment(allTasks);
+  updateLocalStorage();
 };
 
 const updateCheck = id => {
@@ -73,12 +88,14 @@ const updateCheck = id => {
     if (item.id === Number(id)) item.checked = !item.checked;
   });
   printItemsLeft();
+  updateLocalStorage();
 };
 
 const clearCompleted = () => {
   const filteredArray = allTasks.filter(item => !item.checked);
   allTasks = filteredArray;
   createFragment(allTasks);
+  updateLocalStorage();
 };
 
 /* const filterActive = () => {
@@ -108,15 +125,18 @@ filterClearElement.addEventListener('click', () => {
 
 filterCompletedElement.addEventListener('click', () => {
   //filterCompleted();
+  activateFilter(filterCompletedElement);
   filter(true, completedTasks);
 });
 
 filterActiveElement.addEventListener('click', () => {
   //filterActive();
+  activateFilter(filterActiveElement);
   filter(false, activeTasks);
 });
 
 filterAllElement.addEventListener('click', () => {
+  activateFilter(filterAllElement);
   createFragment(allTasks);
 });
 
@@ -133,3 +153,26 @@ formElement.addEventListener('submit', e => {
   if (formInputElement.value !== '') createObject(formInputElement.value);
   formInputElement.value = '';
 });
+
+toggleModeElement.addEventListener('click', () => {
+  if (toggleModeElement.dataset.icon === 'moon') {
+    toggleModeElement.src = 'assets/images/icon-sun.svg';
+    toggleModeElement.dataset.icon = 'sun';
+    LS.setItem('mode', 'dark');
+    console.log(LS);
+  } else {
+    toggleModeElement.src = 'assets/images/icon-moon.svg';
+    toggleModeElement.dataset.icon = 'moon';
+    LS.setItem('mode', 'light');
+    console.log(LS);
+  }
+  document.body.classList.toggle('dark');
+});
+
+if (allTasks) createFragment(allTasks);
+else {
+  allTasks = [];
+  LS.setItem('localStorage', '[]');
+}
+printItemsLeft();
+console.log(allTasks);
