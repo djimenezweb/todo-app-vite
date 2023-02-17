@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [ViteMinifyPlugin({}), ViteImageOptimizer({})],
   base: '',
   root: 'src',
+  publicDir: '../public',
   build: {
     assetsDir: 'assets',
     outDir: '../docs'

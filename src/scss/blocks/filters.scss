@@ -3,7 +3,7 @@
 .filters {
   padding: 1rem 1.5rem;
   font-size: 0.875rem;
-  color: var(--soft-text-color);
+  color: var(--color400);
   display: flex;
   justify-content: space-between;
   gap: 18px;
@@ -18,7 +18,7 @@
 }
 
 .filter__item:hover {
-  color: var(--item);
+  color: var(--color500);
 }
 
 .filter__item:last-child {

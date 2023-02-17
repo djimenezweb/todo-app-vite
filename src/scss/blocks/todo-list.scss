@@ -1,16 +1,10 @@
 @use '../mixins/pseudo.scss' as *;
 
 .todo-list__container {
-  background-color: var(--list-background);
+  background-color: var(--color000);
   border-radius: 5px;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
-
-//.todo-list {
-//background-color: var(--list-background);
-//border-radius: 5px;
-//box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-//}
 
 .task {
   width: 100%;
@@ -20,7 +14,7 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1.5rem;
-  border-bottom: 1px solid var(--lines);
+  border-bottom: 1px solid var(--color300);
 
   &__input {
     display: none;
@@ -30,14 +24,14 @@
     position: relative;
     left: 48px;
     width: 80%;
-    color: var(--item);
+    color: var(--color500);
     line-height: 1;
     cursor: pointer;
 
     &::before {
       @include pseudo(24px, 24px);
-      border: 1px solid var(--lines);
-      background-color: var(--list-background);
+      border: 1px solid var(--color300);
+      background-color: var(--color000);
       border-radius: 50%;
       left: -48px;
       top: 0;
@@ -64,13 +58,13 @@
 }
 
 .task__input:checked + .task__label::before {
-  background-image: url('../assets/images/icon-check.svg'), linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-image: url('/assets/images/icon-check.svg'), linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .task__input:checked + .task__label {
-  color: var(--completed);
+  color: var(--color300);
   text-decoration: line-through;
 }
 

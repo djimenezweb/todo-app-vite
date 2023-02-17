@@ -1,6 +1,9 @@
 import '../scss/styles.scss';
+import { disableDark, enableDark } from './dark-mode';
+import { LS } from './constants/localStorage';
+import { activateFilter, printItemsLeft, deleteTask, updateCheck } from './todo-list';
 
-const LS = localStorage;
+// CONSTANTES
 const formElement = document.getElementById('form');
 const formInputElement = document.getElementById('form__input');
 const todoListElement = document.getElementById('todo-list');
@@ -8,30 +11,20 @@ const filterClearElement = document.getElementById('filter__clear');
 const filterAllElement = document.getElementById('filter__all');
 const filterActiveElement = document.getElementById('filter__active');
 const filterCompletedElement = document.getElementById('filter__completed');
-const itemsLeftElement = document.getElementById('itemsLeft');
+
 const toggleModeElement = document.getElementById('toggle-mode');
 
-//let allTasks = [];
+// VARIABLES
+
+let isDarkSelected = JSON.parse(LS.getItem('dark'));
 let allTasks = JSON.parse(LS.getItem('localStorage'));
 let activeTasks = [];
-
 let completedTasks = [];
 
 // FUNCIONES
 
-const activateFilter = filter => {
-  document.querySelector('.filter__item--active').classList.remove('filter__item--active');
-  filter.classList.add('filter__item--active');
-};
-
 const updateLocalStorage = () => {
-  LS.clear();
   LS.setItem('localStorage', JSON.stringify(allTasks));
-  console.log(LS);
-};
-
-const printItemsLeft = () => {
-  itemsLeftElement.textContent = allTasks.filter(item => !item.checked).length + ' ';
 };
 
 const printFragment = fragment => {
@@ -46,7 +39,7 @@ const createFragment = array => {
     const newInput = document.createElement('input');
     const newLabel = document.createElement('label');
     const newImg = document.createElement('img');
-    newImg.src = 'assets/images/icon-cross.svg';
+    newImg.src = '/icon-cross.svg';
     newImg.classList.add('close-icon');
     newInput.type = 'checkbox';
     newInput.checked = item.checked;
@@ -76,39 +69,12 @@ const createObject = task => {
   updateLocalStorage();
 };
 
-const deleteTask = id => {
-  const filteredArray = allTasks.filter(item => item.id !== id);
-  allTasks = filteredArray;
-  createFragment(allTasks);
-  updateLocalStorage();
-};
-
-const updateCheck = id => {
-  allTasks.forEach(item => {
-    if (item.id === Number(id)) item.checked = !item.checked;
-  });
-  printItemsLeft();
-  updateLocalStorage();
-};
-
 const clearCompleted = () => {
   const filteredArray = allTasks.filter(item => !item.checked);
   allTasks = filteredArray;
   createFragment(allTasks);
   updateLocalStorage();
 };
-
-/* const filterActive = () => {
-  const filteredArray = allTasks.filter(item => !item.checked);
-  activeTasks = filteredArray;
-  createFragment(activeTasks);
-};
-
-const filterCompleted = () => {
-  const filteredArray = allTasks.filter(item => item.checked);
-  completedTasks = filteredArray;
-  createFragment(completedTasks);
-}; */
 
 const filter = (status, array) => {
   const filteredArray = allTasks.filter(item => item.checked === status);
@@ -120,17 +86,14 @@ const filter = (status, array) => {
 
 filterClearElement.addEventListener('click', () => {
   clearCompleted();
-  //filter(false, allTasks);
 });
 
 filterCompletedElement.addEventListener('click', () => {
-  //filterCompleted();
   activateFilter(filterCompletedElement);
   filter(true, completedTasks);
 });
 
 filterActiveElement.addEventListener('click', () => {
-  //filterActive();
   activateFilter(filterActiveElement);
   filter(false, activeTasks);
 });
@@ -155,19 +118,12 @@ formElement.addEventListener('submit', e => {
 });
 
 toggleModeElement.addEventListener('click', () => {
-  if (toggleModeElement.dataset.icon === 'moon') {
-    toggleModeElement.src = 'assets/images/icon-sun.svg';
-    toggleModeElement.dataset.icon = 'sun';
-    LS.setItem('mode', 'dark');
-    console.log(LS);
-  } else {
-    toggleModeElement.src = 'assets/images/icon-moon.svg';
-    toggleModeElement.dataset.icon = 'moon';
-    LS.setItem('mode', 'light');
-    console.log(LS);
-  }
-  document.body.classList.toggle('dark');
+  toggleModeElement.dataset.icon === 'moon' ? enableDark(toggleModeElement) : disableDark(toggleModeElement);
 });
+
+// ACCIONES
+
+isDarkSelected && enableDark(toggleModeElement);
 
 if (allTasks) createFragment(allTasks);
 else {
@@ -175,4 +131,3 @@ else {
   LS.setItem('localStorage', '[]');
 }
 printItemsLeft();
-console.log(allTasks);
