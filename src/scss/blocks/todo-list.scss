@@ -58,7 +58,7 @@
 }
 
 .task__input:checked + .task__label::before {
-  background-image: url('/assets/images/icon-check.svg'), linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  background-image: url('/public/images/icon-check.svg'), linear-gradient(135deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   background-repeat: no-repeat;
   background-position: center;
 }

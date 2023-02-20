@@ -1,8 +1,9 @@
 import '../scss/styles.scss';
+import { disableDark, enableDark } from './dark-mode';
+import { LS } from './constants/localStorage';
+import { activateFilter, printItemsLeft, deleteTask, updateCheck } from './todo-list';
 
 // CONSTANTES
-
-const LS = localStorage;
 const formElement = document.getElementById('form');
 const formInputElement = document.getElementById('form__input');
 const todoListElement = document.getElementById('todo-list');
@@ -10,29 +11,20 @@ const filterClearElement = document.getElementById('filter__clear');
 const filterAllElement = document.getElementById('filter__all');
 const filterActiveElement = document.getElementById('filter__active');
 const filterCompletedElement = document.getElementById('filter__completed');
-const itemsLeftElement = document.getElementById('itemsLeft');
+
 const toggleModeElement = document.getElementById('toggle-mode');
 
 // VARIABLES
 
-let isDarkSelected = LS.getItem('dark');
+let isDarkSelected = JSON.parse(LS.getItem('dark'));
 let allTasks = JSON.parse(LS.getItem('localStorage'));
 let activeTasks = [];
 let completedTasks = [];
 
 // FUNCIONES
 
-const activateFilter = filter => {
-  document.querySelector('.filter__item--active').classList.remove('filter__item--active');
-  filter.classList.add('filter__item--active');
-};
-
 const updateLocalStorage = () => {
   LS.setItem('localStorage', JSON.stringify(allTasks));
-};
-
-const printItemsLeft = () => {
-  itemsLeftElement.textContent = allTasks.filter(item => !item.checked).length + ' ';
 };
 
 const printFragment = fragment => {
@@ -47,7 +39,7 @@ const createFragment = array => {
     const newInput = document.createElement('input');
     const newLabel = document.createElement('label');
     const newImg = document.createElement('img');
-    newImg.src = '../../public/icon-cross.svg';
+    newImg.src = '/icon-cross.svg';
     newImg.classList.add('close-icon');
     newInput.type = 'checkbox';
     newInput.checked = item.checked;
@@ -74,21 +66,6 @@ const createObject = task => {
   newObject.checked = false;
   allTasks.push(newObject);
   createFragment(allTasks);
-  updateLocalStorage();
-};
-
-const deleteTask = id => {
-  const filteredArray = allTasks.filter(item => item.id !== id);
-  allTasks = filteredArray;
-  createFragment(allTasks);
-  updateLocalStorage();
-};
-
-const updateCheck = id => {
-  allTasks.forEach(item => {
-    if (item.id === Number(id)) item.checked = !item.checked;
-  });
-  printItemsLeft();
   updateLocalStorage();
 };
 
@@ -140,25 +117,13 @@ formElement.addEventListener('submit', e => {
   formInputElement.value = '';
 });
 
-const disableDark = () => {
-  document.body.classList.remove('dark');
-  toggleModeElement.src = 'assets/images/icon-moon.svg';
-  toggleModeElement.dataset.icon = 'moon';
-  LS.setItem('dark', 'false');
-};
-
-const enableDark = () => {
-  document.body.classList.add('dark');
-  toggleModeElement.src = 'assets/images/icon-sun.svg';
-  toggleModeElement.dataset.icon = 'sun';
-  LS.setItem('dark', 'true');
-};
-
 toggleModeElement.addEventListener('click', () => {
-  toggleModeElement.dataset.icon === 'moon' ? enableDark() : disableDark();
+  toggleModeElement.dataset.icon === 'moon' ? enableDark(toggleModeElement) : disableDark(toggleModeElement);
 });
 
-isDarkSelected && enableDark();
+// ACCIONES
+
+isDarkSelected && enableDark(toggleModeElement);
 
 if (allTasks) createFragment(allTasks);
 else {
