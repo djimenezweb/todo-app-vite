@@ -9,8 +9,8 @@
   --color300: hsl(233, 11%, 84%);
   --color400: hsl(236, 9%, 61%);
   --color500: hsl(235, 19%, 35%);
-  --mobile-bg: url('/public/images/bg-mobile-light.jpg');
-  --desktop-bg: url('/public/images/bg-desktop-light.jpg');
+  --mobile-bg: url('/public/bg-mobile-light.jpg');
+  --desktop-bg: url('/public/bg-desktop-light.jpg');
 }
 
 .dark {
@@ -20,6 +20,6 @@
   --color300: hsl(233, 14%, 35%);
   --color400: hsl(234, 11%, 52%);
   --color500: hsl(234, 39%, 85%);
-  --mobile-bg: url('/public/images/bg-mobile-dark.jpg');
-  --desktop-bg: url('/public/images/bg-desktop-dark.jpg');
+  --mobile-bg: url('/public/bg-mobile-dark.jpg');
+  --desktop-bg: url('/public/bg-desktop-dark.jpg');
 }

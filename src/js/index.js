@@ -47,7 +47,7 @@ const createFragment = array => {
     const newInput = document.createElement('input');
     const newLabel = document.createElement('label');
     const newImg = document.createElement('img');
-    newImg.src = '/public/images/icon-cross.svg';
+    newImg.src = '/public/icon-cross.svg';
     newImg.classList.add('close-icon');
     newInput.type = 'checkbox';
     newInput.checked = item.checked;
@@ -142,14 +142,14 @@ formElement.addEventListener('submit', e => {
 
 const disableDark = () => {
   document.body.classList.remove('dark');
-  toggleModeElement.src = '/public/images/icon-moon.svg';
+  toggleModeElement.src = '/public/icon-moon.svg';
   toggleModeElement.dataset.icon = 'moon';
   LS.setItem('dark', 'false');
 };
 
 const enableDark = () => {
   document.body.classList.add('dark');
-  toggleModeElement.src = '/public/images/icon-sun.svg';
+  toggleModeElement.src = '/public/icon-sun.svg';
   toggleModeElement.dataset.icon = 'sun';
   LS.setItem('dark', 'true');
 };
