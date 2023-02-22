@@ -1,4 +1,7 @@
 import '../scss/styles.scss';
+import IconCross from '../assets/images/icon-cross.svg';
+import IconMoon from '../assets/images/icon-moon.svg';
+import IconSun from '../assets/images/icon-sun.svg';
 
 // CONSTANTES
 
@@ -47,7 +50,7 @@ const createFragment = array => {
     const newInput = document.createElement('input');
     const newLabel = document.createElement('label');
     const newImg = document.createElement('img');
-    newImg.src = '/public/icon-cross.svg';
+    newImg.src = IconCross;
     newImg.classList.add('close-icon');
     newInput.type = 'checkbox';
     newInput.checked = item.checked;
@@ -142,14 +145,14 @@ formElement.addEventListener('submit', e => {
 
 const disableDark = () => {
   document.body.classList.remove('dark');
-  toggleModeElement.src = '/public/icon-moon.svg';
+  toggleModeElement.src = IconMoon;
   toggleModeElement.dataset.icon = 'moon';
   LS.setItem('dark', 'false');
 };
 
 const enableDark = () => {
   document.body.classList.add('dark');
-  toggleModeElement.src = '/public/icon-sun.svg';
+  toggleModeElement.src = IconSun;
   toggleModeElement.dataset.icon = 'sun';
   LS.setItem('dark', 'true');
 };
