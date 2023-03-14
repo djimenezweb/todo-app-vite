@@ -1,6 +1,8 @@
 @use '../mixins/pseudo.scss' as *;
+@use '../mixins/responsive.scss' as *;
 
-.filters {
+.filters__primary {
+  position: relative;
   padding: 1rem 1.5rem;
   font-size: 0.875rem;
   color: var(--color400);
@@ -9,8 +11,26 @@
   gap: 18px;
 }
 
-.filter__item--left {
-  margin-right: auto;
+.filters__secondary {
+  position: absolute;
+  inset: 4rem 0 auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 1rem;
+  background-color: var(--color000);
+  border-radius: 5px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+
+  @include responsive(tablet) {
+    position: static;
+    justify-content: space-between;
+    font-size: inherit;
+    background-color: none;
+    padding: 0;
+    box-shadow: none;
+  }
 }
 
 .filter__item {
@@ -19,10 +39,6 @@
 
 .filter__item:hover {
   color: var(--color500);
-}
-
-.filter__item:last-child {
-  margin-left: auto;
 }
 
 .filter__item--active {

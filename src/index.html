@@ -24,11 +24,13 @@
       </form>
       <section class="todo-list__container">
         <div id="todo-list"></div>
-        <ul class="filters">
-          <li class="filter__item--left"><span id="itemsLeft"></span>items left</li>
-          <li class="filter__item filter__item--active" id="filter__all">All</li>
-          <li class="filter__item" id="filter__active">Active</li>
-          <li class="filter__item" id="filter__completed">Completed</li>
+        <ul class="filters__primary">
+          <li><span id="itemsLeft"></span>items left</li>
+          <ul class="filters__secondary">
+            <li class="filter__item filter__item--active" id="filter__all">All</li>
+            <li class="filter__item" id="filter__active">Active</li>
+            <li class="filter__item" id="filter__completed">Completed</li>
+          </ul>
           <li class="filter__item" id="filter__clear">Clear Completed</li>
         </ul>
       </section>
